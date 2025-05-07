@@ -1,3 +1,4 @@
+/* Root Variables */
 :root {
   --primary: #0a0b0b;
   --border: #0a0a0a;
@@ -11,11 +12,7 @@
   --text-color: #333;
 }
 
-body {
-  background-color: var(--bg);
-  color: var(--text-color);
-}
-
+/* Dark Theme Variables */
 body.dark {
   --bg: #121212;
   --text: #eee;
@@ -24,10 +21,9 @@ body.dark {
   --border: #f0f7f8;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Base Styles */
+html {
+  font-size: 16px; /* 👇 Set root font size for scaling */
 }
 
 body {
@@ -36,8 +32,18 @@ body {
   color: var(--text);
   transition: background 0.3s, color 0.3s;
   line-height: 1.6;
+  max-width: 1600px; /* 👇 Prevent body from stretching too wide */
+  margin: 0 auto; /* 👇 Center content for large screens */
 }
 
+/* Reset and Global */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Theme Toggle Button */
 #theme-toggle {
   position: fixed;
   top: 15px;
@@ -51,6 +57,7 @@ body {
   z-index: 9999;
 }
 
+/* Navigation */
 nav {
   background: var(--card-bg);
   border-bottom: 1px solid var(--border);
@@ -76,6 +83,7 @@ nav a:hover {
   color: var(--primary);
 }
 
+/* Header */
 header {
   padding: 2rem 0;
 }
@@ -86,6 +94,12 @@ header {
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
+}
+
+/* 👇 Ensure header children scale well */
+.header-container > * {
+  min-width: 300px;
+  flex: 1 1 0;
 }
 
 .name-section {
@@ -102,19 +116,24 @@ header {
   animation: float 5s ease-in-out infinite;
 }
 
+/* Floating animation */
 @keyframes float {
   0% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
 }
 
+/* 👇 Make profile image responsive */
 .profile-pic {
-  width: 200px;
+  max-width: 100%;
+  width: 200px; /* reduced from 200px */
   height: 200px;
   border: 5px solid var(--primary);
   padding: 5px;
+  border-radius: 10px;
 }
 
+/* Highlights and Text */
 .highlighted-title {
   color: #f9fbfc;
   font-weight: 700;
@@ -137,12 +156,18 @@ header {
   color: var(--primary);
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 1rem 2rem;
+/* 👇 Common container for all sections */
+.container,
+.header-container,
+.timeline,
+.skills-grid,
+.project-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
+/* Section Styling */
 section {
   padding: 3rem 0;
 }
@@ -150,8 +175,11 @@ section {
 h2 {
   margin-bottom: 1.5rem;
   text-align: center;
+  line-height: 1.2; /* 👇 Make heading text scale better */
+  word-break: break-word;
 }
 
+/* Education Section */
 .education {
   padding: 50px;
   background-color: var(--bg); 
@@ -166,6 +194,7 @@ h2 {
   color: #080808;
 }
 
+/* Timeline */
 .timeline {
   position: relative;
   max-width: 1000px;
@@ -189,13 +218,8 @@ h2 {
   width: 50%;
 }
 
-.timeline-entry.left {
-  left: 0;
-}
-
-.timeline-entry.right {
-  left: 50%;
-}
+.timeline-entry.left { left: 0; }
+.timeline-entry.right { left: 50%; }
 
 .timeline-entry::before {
   content: '';
@@ -232,6 +256,7 @@ h2 {
   font-weight: 600;
 }
 
+/* Project Section */
 .project-grid {
   display: flex;
   flex-wrap: wrap;
@@ -239,10 +264,13 @@ h2 {
   justify-content: center;
 }
 
+/* 👇 Make project card responsive */
 .project-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
-  width: 300px;
+  width: 100%;
+  max-width: 320px;
+  flex: 1 1 calc(33.333% - 20px);
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
@@ -260,6 +288,7 @@ h2 {
   border-radius: 6px;
 }
 
+/* Tags */
 .tags span {
   display: inline-block;
   background: #ccc;
@@ -280,20 +309,40 @@ h2 {
   margin-right: 10px;
 }
 
+/* Updated Footer Section */
 footer {
-  background: var(--card-bg);
-  color: var(--text);
+  background: #000; /* black background for better contrast */
+  color: #fff;       /* white text for visibility */
   text-align: center;
-  padding: 1rem;
+  padding: 1.5rem;
   border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
+/* Optional: Highlight links in footer clearly */
+footer a {
+  color: #ffa500; /* orange link color for contrast */
+  text-decoration:none;
+  font-weight: bold;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Ensure good visibility in dark theme */
+body.dark footer {
+  background: #000000;
+  color: #fff;
+}
+
+/* Skills Section */
 .skills-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  
   margin-top: 1rem;
 }
 
@@ -302,10 +351,10 @@ footer {
   color: #fff;
   padding: 8px 15px;
   border-radius: 20px;
-  
   font-size: 0.85rem;
 }
 
+/* Responsive Header on Small Screens */
 @media (max-width: 768px) {
   .header-container {
     flex-direction: column;
@@ -313,10 +362,22 @@ footer {
   }
 }
 
+/* 👇 Responsive scaling for extra-large desktops */
+@media (min-width: 1400px) {
+  .container {
+    padding: 2rem 4rem;
+  }
+}
 
+@media (min-width: 1800px) {
+  html {
+    font-size: 18px;
+  }
+}
 
-
-/* FAB Container */
+/* ===================== */
+/* Floating Action Button */
+/* ===================== */
 .fab-wrapper {
   position: fixed;
   bottom: 30px;
@@ -324,7 +385,6 @@ footer {
   z-index: 999;
 }
 
-/* FAB Main Button */
 .fab-button {
   width: 60px;
   height: 60px;
@@ -348,7 +408,6 @@ footer {
   transform: rotate(45deg);
 }
 
-/* FAB Menu Items */
 .fab-menu {
   position: absolute;
   bottom: 70px;
